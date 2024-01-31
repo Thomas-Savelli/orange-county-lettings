@@ -11,6 +11,11 @@ from django.urls import path, include
 from . import views
 
 
+def trigger_error(request):
+    # La variable division_by_zero est délibérément non utilisée pour provoquer une exception.
+    division_by_zero = 1 / 0
+
+
 # Configuration des gestionnaires d'erreurs personnalisés
 handler404 = 'oc_lettings_site.views.custom_404'
 handler500 = 'oc_lettings_site.views.custom_500'
@@ -22,5 +27,6 @@ urlpatterns = [
     path('lettings/', include('lettings.urls')),
     path('profiles/', include('profiles.urls')),
     path('404/', views.custom_404, name='custom_404'),
-    path('500/', views.custom_500, name='custom_500')
+    path('500/', views.custom_500, name='custom_500'),
+    path('sentry-debug/', trigger_error),
 ]

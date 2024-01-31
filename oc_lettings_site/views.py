@@ -7,6 +7,7 @@ les pages associées.
 """
 
 from django.shortcuts import render
+from sentry_sdk import capture_message
 
 
 def index(request):
@@ -25,6 +26,8 @@ def custom_404(request, *args, **kwargs):
     Cette vue rend la page d'erreur 404 en utilisant le template '404.html' et
     retourne une réponse avec le statut HTTP 404.
     """
+    # Log en cas d'erreur 404
+    capture_message("This page was not found !", level='error')
     return render(request, "404.html", status=404)
 
 
@@ -35,4 +38,6 @@ def custom_500(request, *args, **kwargs):
     Cette vue rend la page d'erreur 500 en utilisant le template '500.html' et
     retourne une réponse avec le statut HTTP 500.
     """
+    # Log en cas d'erreur 500
+    capture_message("This page was not found, Error Server !", level='error')
     return render(request, "500.html", status=500)
