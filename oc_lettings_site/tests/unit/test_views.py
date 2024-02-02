@@ -1,7 +1,9 @@
 """
-Ce module contient les tests unitaires pour les views de l'application oc_lettings_site.
+Ce module contient les tests unitaires pour les views
+de l'application oc_lettings_site.
 
-Chaque test vérifie le comportement attendu d'une vue spécifique en utilisant le client de test Django.
+Chaque test vérifie le comportement attendu d'une vue
+spécifique en utilisant le client de test Django.
 Les vues testées incluent 'index', 'custom_404', et 'custom_500'.
 """
 
@@ -25,7 +27,10 @@ def test_index_view():
     content = response.content.decode()
 
     # Ajustement pour résoudre l'avertissement lié à import cgi
-    expected_content = '<h1 class="page-header-ui-title mb-3 display-6">' "Welcome to Holiday Homes</h1>"
+    expected_content = (
+        '<h1 class="page-header-ui-title mb-3 display-6">'
+        "Welcome to Holiday Homes</h1>"
+        )
 
     assert expected_content in content
     assert response.status_code == 200

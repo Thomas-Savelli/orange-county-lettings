@@ -1,8 +1,9 @@
 """
 Module de configuration des URLS pour l'application oc_lettings_site.
 
-Ce module définit les URL de l'application, y compris les vues, les chemins vers les applications incluses,
-et les gestionnaires d'erreurs personnalisés pour les erreurs 404 et 500.
+Ce module définit les URL de l'application, y compris les vues,
+les chemins vers les applications incluses, et les gestionnaires
+d'erreurs personnalisés pour les erreurs 404 et 500.
 """
 
 from django.contrib import admin
@@ -12,8 +13,12 @@ from . import views
 
 
 def trigger_error(request):
-    # La variable division_by_zero est délibérément non utilisée pour provoquer une exception.
-    division_by_zero = 1 / 0
+    """
+    La variable "_" represente une division_by_zero
+    qui est délibérément non utilisée pour provoquer une exception
+    et vérifier si sentry est bien configuré.
+    """
+    _ = 1 / 0
 
 
 # Configuration des gestionnaires d'erreurs personnalisés

@@ -5,7 +5,8 @@ Ce module contient des tests unitaires pour les URLs de l'application 'profiles'
 Il vérifie que les URLs des pages d'index des profils et des profils individuels
 sont correctement configurées et renvoient les bonnes réponses HTTP.
 
-Note: Les tests utilisent des fixtures pour créer des instances de profils nécessaires : conftest.py
+Note: Les tests utilisent des fixtures pour créer
+des instances de profils nécessaires : conftest.py
 """
 
 import pytest

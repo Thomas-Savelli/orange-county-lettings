@@ -47,8 +47,9 @@ def test_lettings_letting_url(address_2):
     """
     Test unitaire pour l'URL de la vue 'letting' de l'application 'lettings'.
 
-    Ce test crée une instance de modèle Letting et vérifie que l'URL de la vue 'letting'
-    avec un ID spécifique renvoie une réponse HTTP 200 et utilise le template 'lettings/letting.html'.
+    Ce test crée une instance de modèle Letting et vérifie
+    que l'URL de la vue 'letting' avec un ID spécifique renvoie
+    une réponse HTTP 200 et utilise le template 'lettings/letting.html'.
     """
 
     # Création d'une instance de modèle Letting avec une adresse spécifique

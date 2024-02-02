@@ -1,8 +1,10 @@
 """
 Module de tests unitaires pour les vues de l'application 'lettings'.
 
-Ce module contient des tests unitaires pour les vues 'index' et 'letting' de l'application 'lettings'.
-Les tests vérifient que les vues renvoient des réponses HTTP 200 avec les templates appropriés et que le contenu
+Ce module contient des tests unitaires pour les vues
+'index' et 'letting' de l'application 'lettings'.
+Les tests vérifient que les vues renvoient des
+réponses HTTP 200 avec les templates appropriés et que le contenu
 des pages correspond aux informations attendues.
 """
 

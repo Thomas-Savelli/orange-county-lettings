@@ -1,8 +1,10 @@
 """
 Module de tests unitaires pour les modèles de l'application 'lettings'.
 
-Ce module contient des tests unitaires pour les modèles Address et Letting de l'application 'lettings'.
-Les tests vérifient la création d'instances, la représentation sous forme de chaîne, et d'autres fonctionnalités
+Ce module contient des tests unitaires pour les modèles Address et
+Letting de l'application 'lettings'.
+Les tests vérifient la création d'instances, la représentation
+sous forme de chaîne, et d'autres fonctionnalités
 des modèles de l'application.
 """
 

@@ -1,7 +1,9 @@
 """
-Ce module contient les tests unitaires pour les urls de l'application oc_lettings_site.
+Ce module contient les tests unitaires pour les
+urls de l'application oc_lettings_site.
 
-Chaque test vérifie le comportement attendu d'une url spécifique en utilisant le client de test Django.
+Chaque test vérifie le comportement attendu d'une url
+spécifique en utilisant le client de test Django.
 Les urls testées incluent '/', '/404/', et '/500/'.
 """
 

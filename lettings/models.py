@@ -14,8 +14,9 @@ class Address(models.Model):
     """
     Modèle représentant une adresse.
 
-    Ce modèle représente une adresse avec des champs tels que le numéro, la rue, la ville, l'État,
-    le code postal et le code ISO du pays. La méthode __str__ est définie pour fournir une représentation
+    Ce modèle représente une adresse avec des champs tels que le numéro,
+    la rue, la ville, l'État, le code postal et le code ISO du pays.
+    La méthode __str__ est définie pour fournir une représentation
     sous forme de chaîne de l'objet.
     """
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
@@ -36,8 +37,10 @@ class Letting(models.Model):
     """
     Modèle représentant une location (letting).
 
-    Ce modèle représente une location avec un titre et une adresse associée (relation OneToOne avec Address).
-    La méthode __str__ est définie pour fournir une représentation sous forme de chaîne de l'objet.
+    Ce modèle représente une location avec un titre et une adresse
+    associée (relation OneToOne avec Address).
+    La méthode __str__ est définie pour fournir une
+    représentation sous forme de chaîne de l'objet.
     """
     title = models.CharField(max_length=256)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)

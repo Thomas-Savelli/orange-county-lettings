@@ -12,7 +12,8 @@ class LettingsConfig(AppConfig):
     """
     Configuration de l'application 'lettings'.
 
-    Cette classe d'applications Django AppConfig est utilisée pour configurer l'application 'lettings'.
+    Cette classe d'applications Django AppConfig est
+    utilisée pour configurer l'application 'lettings'.
     Elle spécifie le nom de l'application ('lettings').
     """
     name = 'lettings'

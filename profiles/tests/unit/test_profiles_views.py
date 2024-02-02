@@ -5,7 +5,8 @@ Ce module contient des tests unitaires pour les vues de l'application 'profiles'
 Il vérifie que les vues 'index' et 'profile' renvoient les réponses HTTP attendues
 et contiennent les informations des profils correctes.
 
-Note: Les tests utilisent des fixtures pour créer des instances de profils nécessaires : conftest.py
+Note: Les tests utilisent des fixtures pour créer
+des instances de profils nécessaires : conftest.py
 """
 
 import pytest
