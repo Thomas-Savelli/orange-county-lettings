@@ -3,9 +3,11 @@ name: CI/CD - Pipeline
 # Déclencheurs : exécute la pipeline sur les push et pull requests sur la branche master
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
   build:
