@@ -1,0 +1,61 @@
+name: CI/CD - Pipeline
+
+# Déclencheurs : exécute la pipeline sur les push et pull requests sur la branche master
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    # Configuration de l'environnement d'exécution (Ubuntu latest, Python 3.11)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+    # Étape pour récupérer le code source
+    - uses: actions/checkout@v3
+    # Étape pour configurer Python
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    # Étape pour installer les dépendances 
+    - name: Install Dependencies
+      id: dependencies-installing
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Étape pour créer et définir les variables d'environnement
+    - name: Creates and sets environment variables
+      id: dot_env
+      run: |
+        echo "DSN=${{ secrets.DSN }}" > .env
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+      if: ${{ steps.dependencies-installing.outcome }} == "success"
+    
+    # Étape pour exécuter le linter (flake8)
+    - name: Run Linting
+      id: linting
+      run: |
+        flake8 .
+      if: ${{ steps.dot_env.outcome }} == "success"
+
+    # Étape pour exécuter les tests    
+    - name: Run Tests
+      id: tests
+      run: |
+        pytest
+      if: ${{ steps.linting.outcome }} == "success"
+
+    # Étape pour s'assurer que la couverture des tests est supérieure à 80%    
+    - name: Ensures test coverage is above 80%
+      id: coverage_test
+      run: |
+        pytest --cov-fail-under=80
+      if: ${{ steps.tests.outcome }} == "success"
