@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [3.11.1]
 
     steps:
     # Étape pour récupérer le code source
@@ -52,7 +52,7 @@ jobs:
     - name: Run Tests
       id: tests
       run: |
-        pytest
+        pytest --ignore=env/lib
       if: ${{ steps.linting.outcome }} == "success"
 
     # Étape pour s'assurer que la couverture des tests est supérieure à 80%    
