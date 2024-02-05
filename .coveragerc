@@ -1,9 +1,11 @@
 [run]
-omit = oc_lettings_site/tests/*
-       oc_lettings_site/migrations/*
-       lettings/migrations/*
-       lettings/tests/*
-       profiles/migrations/*
-       profiles/tests/*
-       __init__.py
-       env/*
+omit = 
+    oc_lettings_site/tests/*
+    oc_lettings_site/migrations/*
+    lettings/migrations/*
+    lettings/tests/*
+    profiles/migrations/*
+    profiles/tests/*
+    __init__.py
+    env/*
+    env/Lib/*
