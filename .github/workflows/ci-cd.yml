@@ -52,7 +52,7 @@ jobs:
     - name: Run Tests
       id: tests
       run: |
-        pytest --ignore=env/lib
+        pytest --ignore=env
       if: ${{ steps.linting.outcome }} == "success"
 
     # Étape pour s'assurer que la couverture des tests est supérieure à 80%    
