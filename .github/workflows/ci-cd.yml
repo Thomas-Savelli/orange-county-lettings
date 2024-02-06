@@ -77,6 +77,10 @@ jobs:
     - name: Build Docker image
       id: docker_build
       run: |
+        echo "Building Docker image..."
+        echo "Current directory: $(pwd)"
+        echo "Listing files in the current directory:"
+        ls -al
         docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }}
       if: ${{ steps.dockerhub-login.outcome }} == "success"
     
