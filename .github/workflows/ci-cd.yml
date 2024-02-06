@@ -1,6 +1,6 @@
 name: CI/CD - Pipeline
 
-# Déclencheurs : exécute la pipeline sur les push et pull requests sur la branche master
+# Déclencheurs : exécute la pipeline sur les push et pull requests sur la branche main
 on:
   push:
     branches:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    # Configuration de l'environnement d'exécution (Ubuntu latest, Python 3.11)
+    # Configuration de l'environnement d'exécution (Ubuntu latest, Python 3.11.1)
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: "thomassavelli/lettings_p13"
@@ -85,7 +85,4 @@ jobs:
       id: push-docker
       run: |
         docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
-      if: 
-        - ${{ steps.docker_build.outcome }} == "success"
-        - github.event_name == 'push'
-        - github.ref == 'refs/heads/main'
+      if: ${{ steps.docker_build.outcome }} == "success"
