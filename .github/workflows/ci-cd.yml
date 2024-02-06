@@ -73,20 +73,14 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       if: ${{ steps.coverage_test.outcome }} == "success" 
 
-    # Construction de l'image Docker
-    - name: Build Docker image
+    # Construction et push de l'image Docker
+    - name: Build and push Docker image
       id: docker_build
-      run: |
-        echo "Building Docker image..."
-        echo "Current directory: $(pwd)"
-        echo "Listing files in the current directory:"
-        ls -al
-        docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }}
+      uses: docker/build-push-action@v5.0.0
+      with:
+      context: .
+      file: ./Dockerfile
+      push: true
+      tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:latest
       if: ${{ steps.dockerhub-login.outcome }} == "success"
-    
-    # Push de l'image Docker sur Dockerhub
-    - name: Push Docker image
-      id: push-docker
-      run: |
-        docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
-      if: ${{ steps.docker_build.outcome }} == "success"
+
