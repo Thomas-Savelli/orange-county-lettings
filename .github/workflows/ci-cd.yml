@@ -13,6 +13,8 @@ jobs:
   build:
     # Configuration de l'environnement d'exécution (Ubuntu latest, Python 3.11)
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: "thomassavelli/lettings_p13"
     strategy:
       matrix:
         python-version: [3.11.1]
@@ -61,3 +63,29 @@ jobs:
       run: |
         pytest --cov-fail-under=80
       if: ${{ steps.tests.outcome }} == "success"
+    
+    # Connection à Dockerhub
+    - name: Dockerhub Login
+      id: dockerhub-login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      if: ${{ steps.coverage_test.outcome }} == "success" 
+
+    # Construction de l'image Docker
+    - name: Build Docker image
+      id: docker_build
+      run: |
+        docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }}
+      if: ${{ steps.dockerhub-login.outcome }} == "success"
+    
+    # Push de l'image Docker sur Dockerhub
+    - name: Push Docker image
+      id: push-docker
+      run: |
+        docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
+      if: 
+        - ${{ steps.docker_build.outcome }} == "success"
+        - github.event_name == 'push'
+        - github.ref == 'refs/heads/main'
