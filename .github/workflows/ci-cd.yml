@@ -83,4 +83,3 @@ jobs:
         push: true
         tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:latest
       if: ${{ steps.dockerhub-login.outcome }} == "success"
-
