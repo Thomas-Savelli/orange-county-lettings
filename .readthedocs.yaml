@@ -6,6 +6,8 @@ build:
   os: ubuntu-22.04
   python:
     version: 3.11.1
+  tools:
+    - sphinx
 
 # Construction de la documentation
 sphinx:
