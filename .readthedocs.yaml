@@ -4,10 +4,8 @@ version: 2
 # Configuration de base, python et autres outils
 build:
   os: ubuntu-22.04
-  python:
-    version: 3.11.1
   tools:
-    - sphinx
+    python: 3.11.1
 
 # Construction de la documentation
 sphinx:
