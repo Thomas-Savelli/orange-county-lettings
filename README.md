@@ -9,6 +9,31 @@
 
 Orange County Lettings est une start-up dans le secteur de la location de biens immobiliers. La start-up est en pleine phase d’expansion aux États-Unis. Elle souhaite améliorer son site tant sur le code que sur le déploiement.
 
+## Sommaire
+0. [Documentation Complète](#documentation)
+
+1. [Developpement](#developpement)
+  - [Amélioration de la Version 2.0](#amélioration-de-la-version-20)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+  - [Création du fichier ".env"](#création-du-fichier-env)
+  - [Executer le Site](#exécuter-le-site)
+  - [Exécuter le Linting](#exécuter-le-linting)
+  - [Exécuter les Tests](#exécuter-les-tests)
+  - [Base de données](#base-de-données)
+  - [Panel d'administration](#panel-dadministration)
+
+2. [Deploiement](#deploiement)
+  - [Prérequis](#prc3a9requis-1)
+  - [Etape de configuration](#etape-de-configuration)
+    - [Utilisation de GitHub Actions](#1---utilisation-de-github-actions)
+    - [Configuration de l'hébergeur Render](#2---configuration-de-lhébergeur-render)
+
+## Documentation
+
+Pour accéder à la documentation complète de ce projet veuillez cliquer ici : --> [Documentation complète](https://orangec-lettings.readthedocs.io/fr/latest/) 
+
+
 ## Developpement
 
 ### Amélioration de la Version 2.0
