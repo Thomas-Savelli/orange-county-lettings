@@ -1,5 +1,5 @@
 # Utilisez la dernière version de Sphinx
-version: 3
+version: 2
 
 # Configuration de base, python et autres outils
 build:
