@@ -1,0 +1,101 @@
+Procédures de déploiement et de gestion de l'application
+========================================================
+
+Deploiement :
+-------------
+
+Le déploiement a été automatisé de façon à ce que chaque commit sur la branche ``main``
+du repository entraine l'éxecution au préalable de plusieurs étapes. 
+Celles ci sont gérer à l'aide de la Pipeline CI-CD (``.github/workflows/ci-cd.yml``).
+
+Voici la liste chronologique des étapes de la Pipeline :
+    - Reproduction de l'environement de développement local
+    - Vérification du formatage du code (Linting)
+    - Déclenchement des tests du projet
+    - Vérification que la couverture de tests soit supérieur à 80%
+
+Si une étape n'est pas valide et renvoie une erreur, cela n'exécutera pas la suite de la Pipeline.
+Si toutes ces étapes sont validées alors la Pipeline éxécutera sa derniere action
+qui est la Conteneurisation du projet avec Docker :
+
+    - Création de deux images Docker :
+    - une image Docker avec le tag : ``latest`` (Derniére version stable)
+    - une image Docker avec le tag du dernier commit. (Permet de mieux gérer le systéme de version)
+    - Push des images Docker sur DockerHub
+
+Une fois que la Pipeline a été exécuter correctement sans retour d'erreur,
+nos images sont donc disponible sur DockerHub et notre hébergeur Render récupére
+automatique notre image Docker: ``latest`` , ce qui permet de garder notre projet à jour.
+
+le fichier ``ci-cd-other.yml`` concerne les commits des autres branches et par conséquent
+ne prend pas en charge les modifications de la branche principal ``main`` ! 
+Ce fichier se comporte de la même maniére que ``ci-cd.yml`` si ce n'est que la Pipeline
+n'effectue que les 4 premiéres étapes
+( de la reproduction de l'environement à la vérification de la couverture de tests ) .
+
+Prérequis :
+-----------
+
+- Votre compte GitHub
+- Compte Sentry (*https://sentry.io/signup/*)
+- Compte Docker Hub (*https://hub.docker.com/*)
+- Compte Render (*https://render.com/*)
+
+Etape de configuration :
+
+Normalement vous avez déja du pendant l'initialisation du projet créer un fichier ``.env``
+à la racine du projet. Si ce n'est pas le cas, alors faite le car afin d'assurer une securité optimale,
+les données sensibles n'ont pas été intégrées au repository.
+Veuillez donc à la racine du projet créer une fichier nommé : ``.env`` et y mettre les variables suivante :
+``SECRET_KEY="la clé secrète du projet"``
+``DSN="la clé dsn de sentry"``
+
+La clé DSN de sentry, vous sera communiquée par Sentry (*https://sentry.io/signup/*),
+lorsque vous aurez créer un compte et que vous aurez créer un projet.
+Vous n'aurez qu'à copier coller la valeur de la clé DSN.
+
+1 - Utilisation de GitHub Actions :
+-----------------------------------
+
+Une foie que vous vous êtes créer un compte sur DockerHub :
+
+  - Rendez-vous dans le repository GitHub du projet que vous aurez au préalablement pusher sur votre compte distant.
+
+  - Puis cliquez sur ```Settings``` dans la barre horizontale au dessus de vos fichiers.
+
+  - Dans la barre latérale gauche, selectionner ``Secrets and variables`` puis cliquez sur ``Actions``.
+
+  - Vous pouvez ensuite en base de la page (section Secrets), créez de nouveaux repository secrets :
+            - DSN (Votre key DSN de Sentry)
+            - SECRET_KEY (Votre secrete key de django)
+            - DOCKERHUB_USERNAME (Votre Username de connexion DockerHub)
+            - DOCKER_PASSWORD (Votre mot de passe pour une connexion DockerHub)
+  
+  - Ceci étant fais, créer un nouveau commit et pusher le projet sur votre repository.
+
+  - Rendez-vous dans votre repository et cliquer sur Actions dans la barre horizontale au dessus du projet.
+    Normalement vous devez constater deux plusieurs choses :
+        - La premiére est que dans la barre latérale droite, vous disposez des deux Pipelines ( ``ci-cd.yml`` & ``ci-cd-other.yml`` ).
+        - En cliquant sur ``ci-cd.yml`` vous devez normalement avoir deux workflows. 
+        - Un workflow (le premier) qui est vert donc qui a reussi. Il correspond au dernier commit que vous venez d'effectuer.
+        - Un workflow (le dernier) qui est rouge et donc qui a échoué.
+          Il correspond au premier push que vous avez effectuer avant de renseigner vos variables secrets dans GitHub.
+  
+2 - Configuration de l'hébergeur Render :
+-----------------------------------------
+
+Rendez vous sur le site de l'hébergeur Render et créez vous un compte.
+Différentes options s'offrent à vous, sachez que n'utilisant pas l'option ssh,
+la version gratuite est amplement suffisante pour que le deploiement soit réussi.
+Toutefois, si vous choisiez la version gratuite, sachez que les services peuvent
+nécéssiter plus de temps pour fonctionner.
+
+Une fois que votre compte est créer :
+  - Cliquez sur ``New`` puis ``Web Service`` pour créer une nouvelle instance.
+  - Choisissez la méthode : ``Deploy an existing image from a registry``
+  - Dans Image Url, veuillez renseigner l'url de votre image Docker. 
+  - Ceci fait, vous vous retrouvez devant les logs de votre application.
+    Une fois que le message ``Your service is live`` apparait dans vos logs,
+    votre application est en ligne ! 
+
+

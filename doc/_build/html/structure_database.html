@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Structure et Modeles de la Base de Données &#8212; Documentation OC-Lettings 2</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=96d2a58b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Interfaces de Programmation" href="programming_interface.html" />
+    <link rel="prev" title="Technologies et Languages de Programmation utilisées" href="technologies.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="structure-et-modeles-de-la-base-de-donnees">
+<h1>Structure et Modeles de la Base de Données<a class="headerlink" href="#structure-et-modeles-de-la-base-de-donnees" title="Link to this heading">¶</a></h1>
+<section id="application-lettings">
+<h2>Application « lettings »<a class="headerlink" href="#application-lettings" title="Link to this heading">¶</a></h2>
+<p>L’application « lettings » définit deux modèles principaux dans la base de données.</p>
+<p>1 Address : Ce modèle représente une adresse avec les champs suivants :</p>
+<ul class="simple">
+<li><p>number : Numéro de rue (entier positif).</p></li>
+<li><p>street : Nom de la rue.</p></li>
+<li><p>city : Nom de la ville.</p></li>
+<li><p>state : État (code ISO à deux caractères).</p></li>
+<li><p>zip_code : Code postal (entier positif).</p></li>
+<li><p>country_iso_code : Code ISO du pays (trois caractères).</p></li>
+</ul>
+<p>2 Letting : Ce modèle représente une location avec les champs suivants :</p>
+<ul class="simple">
+<li><p>title : Titre de la location.</p></li>
+<li><p>address : Relation OneToOne avec le modèle Address, représentant l’adresse associée à la location.</p></li>
+</ul>
+</section>
+<section id="application-profiles">
+<h2>Application « profiles »<a class="headerlink" href="#application-profiles" title="Link to this heading">¶</a></h2>
+<p>L’application « profiles » définit un modèle dans sa base de données.</p>
+<p>Profile (Profil d’Utilisateur) : Ce modèle représente un profil d’utilisateur avec les champs suivants :
+user : Relation OneToOne avec le modèle d’utilisateur de Django (User).
+favorite_city : Ville préférée de l’utilisateur (chaîne de caractères, optionnelle).</p>
+</section>
+<section id="la-class-user">
+<h2>La Class User<a class="headerlink" href="#la-class-user" title="Link to this heading">¶</a></h2>
+<p>La classe User est fournie par Django et gère les informations d’authentification de l’utilisateur,
+telles que le nom d’utilisateur, le mot de passe, etc.</p>
+</section>
+<section id="schema-uml">
+<h2>Schéma UML<a class="headerlink" href="#schema-uml" title="Link to this heading">¶</a></h2>
+<img alt="schema uml de la base de données" src="_images/oc_lettings_uml.png" />
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Sommaire:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description_project.html">Description du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_project.html">Installation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_project.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et langages de programmation à utiliser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Description de la structure de la base de données et des modèles de données</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-lettings">Application « lettings »</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-profiles">Application « profiles »</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#la-class-user">La Class User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#schema-uml">Schéma UML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="programming_interface.html">Description des interfaces de programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_management_procedures.html">Procédures de déploiement et de gestion de l'application</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="technologies.html" title="Chapitre précédent">Technologies et Languages de Programmation utilisées</a></li>
+      <li>Next: <a href="programming_interface.html" title="Chapitre suivant">Interfaces de Programmation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Thomas Savelli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/structure_database.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

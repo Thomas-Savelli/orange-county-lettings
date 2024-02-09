@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Installation du projet &#8212; Documentation OC-Lettings 2</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=96d2a58b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Démarrage rapide" href="quick_start_project.html" />
+    <link rel="prev" title="Description du projet" href="description_project.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="installation-du-projet">
+<h1>Installation du projet<a class="headerlink" href="#installation-du-projet" title="Link to this heading">¶</a></h1>
+<section id="clone-du-repository">
+<h2>Clone du repository<a class="headerlink" href="#clone-du-repository" title="Link to this heading">¶</a></h2>
+<p>Télécharger l’intégralité du repository sur :</p>
+<p><a class="reference external" href="https://github.com/Thomas-Savelli/orange-county-lettings.git">https://github.com/Thomas-Savelli/orange-county-lettings.git</a></p>
+<p>Pour ce faire, veuillez ouvrir votre Terminal de Commande:</p>
+<p>1. Grace à la commande cd , dirigez vous vers le répertoire ou vous voulez installer le repository exemple : <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">Desktop</span></code>
+<em>(pour l’installer sur le Desktop de votre ordinateur)</em>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Par la suite, entrez dans votre terminal la commande :</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/Thomas-Savelli/orange-county-lettings.git</span></code></p>
+<p>puis appuyer sur entrée afin de créer votre clone local.</p>
+<p>Une fois le repository téléchargé et stocké localement, rendez vous dans le dossier du projet. Pour cela utiliser la commande :</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">Python-OC-Lettings-FR</span></code></p>
+<p>Créer un environnement virtuel afin de récupérer les dépendances et packages du projet.</p>
+<p><em>(exemple procedure)</em> : <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">env</span></code></p>
+<p>Contrôler avec <code class="docutils literal notranslate"><span class="pre">ls</span></code> que vous disposez maintenant d’un dossier env. Si ce n’est pas le cas, réitérer cette étape en contrôlant la syntaxe de la ligne de commande. Sinon activer votre nouvel environnement virtuel.</p>
+<blockquote>
+<div><p>exemple procédure :
+- (PowerShell): <code class="docutils literal notranslate"><span class="pre">.\env\Scripts\activate</span></code>
+- (Windows): <code class="docutils literal notranslate"><span class="pre">.\env\Scripts\activate.bat</span></code>
+- (autres): <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">env/bin/activate</span></code></p>
+</div></blockquote>
+<p><em>Si vous rencontrez des difficultés vous pouvez vous référer sur le site :</em></p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/18713086/virtualenv-wont-activate-on-windows/18713789#18713789">https://stackoverflow.com/questions/18713086/virtualenv-wont-activate-on-windows/18713789#18713789</a></p>
+<blockquote>
+<div><p>Pour contrôler la réussite de cette manœuvre, vous devriez avoir un <code class="docutils literal notranslate"><span class="pre">(env)</span></code> devant votre ligne de commande.</p>
+<p>PS : Taper seulement <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> pour fermer ce dernier.</p>
+</div></blockquote>
+<p>Pour finir, télécharger avec pip les packages et dépendances requis pour le bon fonctionnement du code avec le requirements.txt en entrant la commande suivante <em>(dans votre environnement virtuel !)</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt`</span></code></p>
+<p>Une fois le téléchargement effectué et l’installation terminée, vous êtes prêt à exécuter le code.</p>
+</section>
+<section id="creation-du-fichier-env">
+<h2>Création du fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code><a class="headerlink" href="#creation-du-fichier-env" title="Link to this heading">¶</a></h2>
+<p>Afin d’assurer une securité optimale, les données sensibles n’ont pas été intégrées au repository.
+Veuillez donc à la racine du projet créer une fichier nommé : <code class="docutils literal notranslate"><span class="pre">.env</span></code> et veuillez y mettre les variables suivante :</p>
+<p><code class="docutils literal notranslate"><span class="pre">SECRET_KEY=&quot;la</span> <span class="pre">clé</span> <span class="pre">secrète</span> <span class="pre">du</span> <span class="pre">projet&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">DSN=&quot;la</span> <span class="pre">clé</span> <span class="pre">dsn</span> <span class="pre">de</span> <span class="pre">sentry&quot;</span></code></p>
+<p>La clé DSN de sentry, vous sera communiquée par Sentry <a class="reference external" href="https://sentry.io/signup/">https://sentry.io/signup/</a>, lorsque vous aurez créer un compte et que vous aurez créer un projet. Vous n’aurez qu’à copier coller la valeur de la clé DSN.</p>
+</section>
+<section id="executer-le-site">
+<h2>Exécuter le site :<a class="headerlink" href="#executer-le-site" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Dans le repertoire du projet en ayant votre <code class="docutils literal notranslate"><span class="pre">env</span></code> activé :</dt><dd><ul class="simple">
+<li><p>Tapez : <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></code></p></li>
+<li><p>Aller sur <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a> dans un navigateur.</p></li>
+<li><p>Confirmer que le site fonctionne et qu’il est possible de naviguer (vous devriez voir plusieurs profils et locations).</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Sommaire:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description_project.html">Description du projet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation du projet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#clone-du-repository">Clone du repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-du-fichier-env">Création du fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executer-le-site">Exécuter le site :</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_project.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et langages de programmation à utiliser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html">Structure et Modeles de la Base de Données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html#schema-uml">Schéma UML:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_interface.html">Description des interfaces de programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_management_procedures.html">Procédures de déploiement et de gestion de l'application</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="description_project.html" title="Chapitre précédent">Description du projet</a></li>
+      <li>Next: <a href="quick_start_project.html" title="Chapitre suivant">Démarrage rapide</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Thomas Savelli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/installation_project.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guide d’Utilisation &#8212; Documentation OC-Lettings 2</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=96d2a58b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Procédures de déploiement et de gestion de l’application" href="deployment_management_procedures.html" />
+    <link rel="prev" title="Interfaces de Programmation" href="programming_interface.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="guide-d-utilisation">
+<h1>Guide d’Utilisation<a class="headerlink" href="#guide-d-utilisation" title="Link to this heading">¶</a></h1>
+<p>Pour accéder à l’application web aprés le déploiement avec Render, vous pouvez utiliser l’URL suivante :</p>
+<p><code class="docutils literal notranslate"><span class="pre">https://oc-lettings-srth.onrender.com/</span></code></p>
+<p>Sur la page d’accueil, differents boutons vous permettrons de naviguer entre les differentes
+pages de l’application pour pouvoir :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Consulter les profiles</p></li>
+<li><p>Consulter le détail d’un profile en particulier</p></li>
+<li><p>Consulter les locations</p></li>
+<li><p>Consulter les détails d’une location en particulier</p></li>
+</ul>
+</div></blockquote>
+<p>Voici une liste des differentes URLs de l’application :</p>
+<p>URLs principales :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> : Page d’accueil du site.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/lettings/</span></code> : Liste des locations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/lettings/&lt;letting_id&gt;/</span></code> : Page détaillée d’une location.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/profiles/</span></code> : Liste des profils utilisateurs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/profiles/&lt;username&gt;/</span></code> : Page détaillée d’un profil utilisateur.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/admin/</span></code> : Interface de gestion administratif de Django.</p></li>
+</ul>
+</div></blockquote>
+<p>URLs de gestions des erreurs :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/404/</span></code> : Page personnalisée pour les erreurs 404.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/500/</span></code> : Page personnalisée pour les erreurs 500.</p></li>
+</ul>
+</div></blockquote>
+<p>URL pour effectuer un test de configuration de suivi des erreurs avecSentry :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/sentry-debug/</span></code> : Page pour tester le suivi des erreurs avec Sentry.</p></li>
+</ul>
+</div></blockquote>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Sommaire:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description_project.html">Description du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_project.html">Installation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_project.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et langages de programmation à utiliser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html">Description de la structure de la base de données et des modèles de données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_interface.html">Description des interfaces de programmation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_management_procedures.html">Procédures de déploiement et de gestion de l'application</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="programming_interface.html" title="Chapitre précédent">Interfaces de Programmation</a></li>
+      <li>Next: <a href="deployment_management_procedures.html" title="Chapitre suivant">Procédures de déploiement et de gestion de l’application</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Thomas Savelli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/user_manual.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

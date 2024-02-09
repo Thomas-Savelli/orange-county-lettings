@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Procédures de déploiement et de gestion de l’application &#8212; Documentation OC-Lettings 2</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=96d2a58b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=d99ca74e"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Guide d’Utilisation" href="user_manual.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="procedures-de-deploiement-et-de-gestion-de-l-application">
+<h1>Procédures de déploiement et de gestion de l’application<a class="headerlink" href="#procedures-de-deploiement-et-de-gestion-de-l-application" title="Link to this heading">¶</a></h1>
+<section id="deploiement">
+<h2>Deploiement :<a class="headerlink" href="#deploiement" title="Link to this heading">¶</a></h2>
+<p>Le déploiement a été automatisé de façon à ce que chaque commit sur la branche <code class="docutils literal notranslate"><span class="pre">main</span></code>
+du repository entraine l’éxecution au préalable de plusieurs étapes.
+Celles ci sont gérer à l’aide de la Pipeline CI-CD (<code class="docutils literal notranslate"><span class="pre">.github/workflows/ci-cd.yml</span></code>).</p>
+<dl class="simple">
+<dt>Voici la liste chronologique des étapes de la Pipeline :</dt><dd><ul class="simple">
+<li><p>Reproduction de l’environement de développement local</p></li>
+<li><p>Vérification du formatage du code (Linting)</p></li>
+<li><p>Déclenchement des tests du projet</p></li>
+<li><p>Vérification que la couverture de tests soit supérieur à 80%</p></li>
+</ul>
+</dd>
+</dl>
+<p>Si une étape n’est pas valide et renvoie une erreur, cela n’exécutera pas la suite de la Pipeline.
+Si toutes ces étapes sont validées alors la Pipeline éxécutera sa derniere action
+qui est la Conteneurisation du projet avec Docker :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Création de deux images Docker :</p></li>
+<li><p>une image Docker avec le tag : <code class="docutils literal notranslate"><span class="pre">latest</span></code> (Derniére version stable)</p></li>
+<li><p>une image Docker avec le tag du dernier commit. (Permet de mieux gérer le systéme de version)</p></li>
+<li><p>Push des images Docker sur DockerHub</p></li>
+</ul>
+</div></blockquote>
+<p>Une fois que la Pipeline a été exécuter correctement sans retour d’erreur,
+nos images sont donc disponible sur DockerHub et notre hébergeur Render récupére
+automatique notre image Docker: <code class="docutils literal notranslate"><span class="pre">latest</span></code> , ce qui permet de garder notre projet à jour.</p>
+<p>le fichier <code class="docutils literal notranslate"><span class="pre">ci-cd-other.yml</span></code> concerne les commits des autres branches et par conséquent
+ne prend pas en charge les modifications de la branche principal <code class="docutils literal notranslate"><span class="pre">main</span></code> !
+Ce fichier se comporte de la même maniére que <code class="docutils literal notranslate"><span class="pre">ci-cd.yml</span></code> si ce n’est que la Pipeline
+n’effectue que les 4 premiéres étapes
+( de la reproduction de l’environement à la vérification de la couverture de tests ) .</p>
+</section>
+<section id="prerequis">
+<h2>Prérequis :<a class="headerlink" href="#prerequis" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Votre compte GitHub</p></li>
+<li><p>Compte Sentry (<em>https://sentry.io/signup/</em>)</p></li>
+<li><p>Compte Docker Hub (<em>https://hub.docker.com/</em>)</p></li>
+<li><p>Compte Render (<em>https://render.com/</em>)</p></li>
+</ul>
+<p>Etape de configuration :</p>
+<p>Normalement vous avez déja du pendant l’initialisation du projet créer un fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code>
+à la racine du projet. Si ce n’est pas le cas, alors faite le car afin d’assurer une securité optimale,
+les données sensibles n’ont pas été intégrées au repository.
+Veuillez donc à la racine du projet créer une fichier nommé : <code class="docutils literal notranslate"><span class="pre">.env</span></code> et y mettre les variables suivante :
+<code class="docutils literal notranslate"><span class="pre">SECRET_KEY=&quot;la</span> <span class="pre">clé</span> <span class="pre">secrète</span> <span class="pre">du</span> <span class="pre">projet&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">DSN=&quot;la</span> <span class="pre">clé</span> <span class="pre">dsn</span> <span class="pre">de</span> <span class="pre">sentry&quot;</span></code></p>
+<p>La clé DSN de sentry, vous sera communiquée par Sentry (<em>https://sentry.io/signup/</em>),
+lorsque vous aurez créer un compte et que vous aurez créer un projet.
+Vous n’aurez qu’à copier coller la valeur de la clé DSN.</p>
+</section>
+<section id="utilisation-de-github-actions">
+<h2>1 - Utilisation de GitHub Actions :<a class="headerlink" href="#utilisation-de-github-actions" title="Link to this heading">¶</a></h2>
+<p>Une foie que vous vous êtes créer un compte sur DockerHub :</p>
+<blockquote>
+<div><ul>
+<li><p>Rendez-vous dans le repository GitHub du projet que vous aurez au préalablement pusher sur votre compte distant.</p></li>
+<li><p>Puis cliquez sur <code class="docutils literal notranslate"><span class="pre">`Settings`</span></code> dans la barre horizontale au dessus de vos fichiers.</p></li>
+<li><p>Dans la barre latérale gauche, selectionner <code class="docutils literal notranslate"><span class="pre">Secrets</span> <span class="pre">and</span> <span class="pre">variables</span></code> puis cliquez sur <code class="docutils literal notranslate"><span class="pre">Actions</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Vous pouvez ensuite en base de la page (section Secrets), créez de nouveaux repository secrets :</dt><dd><ul class="simple">
+<li><p>DSN (Votre key DSN de Sentry)</p></li>
+<li><p>SECRET_KEY (Votre secrete key de django)</p></li>
+<li><p>DOCKERHUB_USERNAME (Votre Username de connexion DockerHub)</p></li>
+<li><p>DOCKER_PASSWORD (Votre mot de passe pour une connexion DockerHub)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Ceci étant fais, créer un nouveau commit et pusher le projet sur votre repository.</p></li>
+<li><p>Rendez-vous dans votre repository et cliquer sur Actions dans la barre horizontale au dessus du projet.
+Normalement vous devez constater deux plusieurs choses :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>La premiére est que dans la barre latérale droite, vous disposez des deux Pipelines ( <code class="docutils literal notranslate"><span class="pre">ci-cd.yml</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">ci-cd-other.yml</span></code> ).</p></li>
+<li><p>En cliquant sur <code class="docutils literal notranslate"><span class="pre">ci-cd.yml</span></code> vous devez normalement avoir deux workflows.</p></li>
+<li><p>Un workflow (le premier) qui est vert donc qui a reussi. Il correspond au dernier commit que vous venez d’effectuer.</p></li>
+<li><p>Un workflow (le dernier) qui est rouge et donc qui a échoué.
+Il correspond au premier push que vous avez effectuer avant de renseigner vos variables secrets dans GitHub.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="configuration-de-l-hebergeur-render">
+<h2>2 - Configuration de l’hébergeur Render :<a class="headerlink" href="#configuration-de-l-hebergeur-render" title="Link to this heading">¶</a></h2>
+<p>Rendez vous sur le site de l’hébergeur Render et créez vous un compte.
+Différentes options s’offrent à vous, sachez que n’utilisant pas l’option ssh,
+la version gratuite est amplement suffisante pour que le deploiement soit réussi.
+Toutefois, si vous choisiez la version gratuite, sachez que les services peuvent
+nécéssiter plus de temps pour fonctionner.</p>
+<dl class="simple">
+<dt>Une fois que votre compte est créer :</dt><dd><ul class="simple">
+<li><p>Cliquez sur <code class="docutils literal notranslate"><span class="pre">New</span></code> puis <code class="docutils literal notranslate"><span class="pre">Web</span> <span class="pre">Service</span></code> pour créer une nouvelle instance.</p></li>
+<li><p>Choisissez la méthode : <code class="docutils literal notranslate"><span class="pre">Deploy</span> <span class="pre">an</span> <span class="pre">existing</span> <span class="pre">image</span> <span class="pre">from</span> <span class="pre">a</span> <span class="pre">registry</span></code></p></li>
+<li><p>Dans Image Url, veuillez renseigner l’url de votre image Docker.</p></li>
+<li><p>Ceci fait, vous vous retrouvez devant les logs de votre application.
+Une fois que le message <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">service</span> <span class="pre">is</span> <span class="pre">live</span></code> apparait dans vos logs,
+votre application est en ligne !</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Sommaire:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description_project.html">Description du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_project.html">Installation du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_project.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et langages de programmation à utiliser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html">Structure et Modeles de la Base de Données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html#schema-uml">Schéma UML:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_interface.html">Description des interfaces de programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manual.html">Guide d’utilisation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Procédures de déploiement et de gestion de l'application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deploiement">Deploiement :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequis">Prérequis :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utilisation-de-github-actions">1 - Utilisation de GitHub Actions :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-de-l-hebergeur-render">2 - Configuration de l’hébergeur Render :</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="user_manual.html" title="Chapitre précédent">Guide d’Utilisation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Thomas Savelli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/deployment_management_procedures.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

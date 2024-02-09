@@ -110,7 +110,7 @@ Et si vous désirez également générer un nouveau rapport html de couverture d
 - Aller sur `http://localhost:8000/admin`
 - Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
 
-## Production
+## Deploiement
 Le déploiement a été automatisé de façon à ce que chaque commit sur la branche ```main``` du repository entraine l'éxecution au préalable de plusieurs étapes. Celles ci sont gérer à l'aide de la Pipeline CI-CD (```.github/workflows/ci-cd.yml```).
 
 Voici la liste chronologique des étapes de la Pipeline :
