@@ -84,22 +84,3 @@ jobs:
         tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:latest
       if: ${{ steps.dockerhub-login.outcome }} == "success"
 
-    - name: Install Render CLI
-      id: Render_CLI
-      run: |
-        # installations directes pour tous les systèmes d'exploitation pris en charge
-        curl -LJO https://github.com/render-oss/render-cli/releases/latest/download/render
-        chmod +x render
-        # Crée le répertoire s'il n'existe pas
-        mkdir -p $HOME/bin
-        mv render $HOME/bin/render
-        # Ajoute le chemin au PATH
-        echo 'PATH=$HOME/bin:$PATH' >> $GITHUB_ENV
-      if: ${{ steps.docker_build.outcome }} == "success"
-
-    - name: Trigger Render Deployment
-      run: |
-        # Déclenchement du déploiement automatique sur Render du service oc_lettings
-        # en utilisant le Render CLI installé précédemment
-        /usr/local/bin/render deploy --service oc_lettings
-      if: ${{ steps.Render_CLI.outcome }} == "success"
