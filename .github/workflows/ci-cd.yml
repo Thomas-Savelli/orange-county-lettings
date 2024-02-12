@@ -84,9 +84,15 @@ jobs:
         tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:latest
       if: ${{ steps.dockerhub-login.outcome }} == "success"
 
+    - name: Install Render CLI
+      id: Render_CLI
+      run: |
+        curl -sL https://render.com/install.sh | bash
+      if: ${{ steps.docker_build.outcome }} == "success"
+
     - name: Trigger Render Deployment
       run: |
         # Pas la peine de se connecter car GitHub est authentifié comme identifiant du compte
         # Déclenchement du déploiement manuel sur Render de l'application
         render deploy --service oc_lettings
-      if: ${{ steps.docker_build.outcome }} == "success"
+      if: ${{ steps.Render_CLI.outcome }} == "success"
