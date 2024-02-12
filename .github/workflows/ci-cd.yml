@@ -95,5 +95,7 @@ jobs:
 
     - name: Trigger Render Deployment
       run: |
-        render deploy --service oc_lettings
+        # Déclenchement du déploiement automatique sur Render du service oc_lettings
+        # en utilisant le Render CLI installé précédemment
+        /usr/local/bin/render deploy --service oc_lettings
       if: ${{ steps.Render_CLI.outcome }} == "success"
