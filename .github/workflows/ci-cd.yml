@@ -83,4 +83,13 @@ jobs:
         push: true
         tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:latest
       if: ${{ steps.dockerhub-login.outcome }} == "success"
+  
+    # Déclenchement du déploiement sur Render
+      - name: Trigger Render Deployment
+        id: render_deploy
+        run: |
+          RENDER_WEBHOOK="${{ secrets.RENDER_WEBHOOK }}"
+          DOCKER_IMAGE_URL="${{ env.IMAGE_NAME }}:latest"
+          curl -X POST "${RENDER_WEBHOOK}&imgURL=${DOCKER_IMAGE_URL}"
+        if: ${{ steps.docker_build.outcome }} == "success"
 
