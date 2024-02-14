@@ -182,6 +182,7 @@ Une foie que vous vous êtes créer un compte sur DockerHub :
     - SECRET_KEY (Votre secrete key de django)
     - DOCKERHUB_USERNAME (Votre Username de connexion DockerHub)
     - DOCKER_PASSWORD (Votre mot de passe pour une connexion DockerHub)
+    - RENDER_WEBHOOK (Votre URL privée pour déclencher un déploiement pour le serveur que vous allez créer ci_dessous)
   
   - Ceci étant fais, créer un nouveau commit et pusher le projet sur votre repository.
 
@@ -199,6 +200,7 @@ Une fois que votre compte est créer :
   - Cliquez sur ```New``` puis ```Web Service``` pour créer une nouvelle instance.
   - Choisissez la méthode : ```Deploy an existing image from a registry```
   - Dans Image Url, veuillez renseigner l'url de votre image Docker. 
-  - Ceci fait, vous vous retrouvez devant les logs de votre application. Une fois que le message "Your service is live" apparait dans vos logs, votre application est en ligne ! 
+  - Ceci fait, vous vous retrouvez devant les logs de votre application. Une fois que le message "Your service is live" apparait dans vos logs, votre application est en ligne !
+  - Récupérer dans les parametres de votre application sur Render, l'URL privé dans ```Deploy Hook``` pour créer dans github votre secrets variable : ```RENDER_WEBHOOK```. Cela permettra à la Pipeline ci-cd.yml de redéployer automatique la mise à jour de l'image Docker latest sur Render.
 
 
