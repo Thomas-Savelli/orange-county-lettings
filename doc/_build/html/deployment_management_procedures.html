@@ -80,9 +80,9 @@ n’effectue que les 4 premiéres étapes
 <p>Normalement vous avez déja du pendant l’initialisation du projet créer un fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code>
 à la racine du projet. Si ce n’est pas le cas, alors faite le car afin d’assurer une securité optimale,
 les données sensibles n’ont pas été intégrées au repository.
-Veuillez donc à la racine du projet créer une fichier nommé : <code class="docutils literal notranslate"><span class="pre">.env</span></code> et y mettre les variables suivante :
-<code class="docutils literal notranslate"><span class="pre">SECRET_KEY=&quot;la</span> <span class="pre">clé</span> <span class="pre">secrète</span> <span class="pre">du</span> <span class="pre">projet&quot;</span></code>
-<code class="docutils literal notranslate"><span class="pre">DSN=&quot;la</span> <span class="pre">clé</span> <span class="pre">dsn</span> <span class="pre">de</span> <span class="pre">sentry&quot;</span></code></p>
+Veuillez donc à la racine du projet créer une fichier nommé : <code class="docutils literal notranslate"><span class="pre">.env</span></code> et y mettre les variables suivante :</p>
+<p><code class="docutils literal notranslate"><span class="pre">SECRET_KEY=&quot;la</span> <span class="pre">clé</span> <span class="pre">secrète</span> <span class="pre">du</span> <span class="pre">projet&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">DSN=&quot;la</span> <span class="pre">clé</span> <span class="pre">dsn</span> <span class="pre">de</span> <span class="pre">sentry&quot;</span></code></p>
 <p>La clé DSN de sentry, vous sera communiquée par Sentry (<em>https://sentry.io/signup/</em>),
 lorsque vous aurez créer un compte et que vous aurez créer un projet.
 Vous n’aurez qu’à copier coller la valeur de la clé DSN.</p>
@@ -101,6 +101,7 @@ Vous n’aurez qu’à copier coller la valeur de la clé DSN.</p>
 <li><p>SECRET_KEY (Votre secrete key de django)</p></li>
 <li><p>DOCKERHUB_USERNAME (Votre Username de connexion DockerHub)</p></li>
 <li><p>DOCKER_PASSWORD (Votre mot de passe pour une connexion DockerHub)</p></li>
+<li><p>RENDER_WEBHOOK (Votre URL privée pour déclencher un déploiement pour le serveur que vous allez créer ci_dessous)</p></li>
 </ul>
 </dd>
 </dl>
@@ -136,6 +137,9 @@ nécéssiter plus de temps pour fonctionner.</p>
 <li><p>Ceci fait, vous vous retrouvez devant les logs de votre application.
 Une fois que le message <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">service</span> <span class="pre">is</span> <span class="pre">live</span></code> apparait dans vos logs,
 votre application est en ligne !</p></li>
+<li><p>Récupérer dans les parametres de votre application sur Render, l’URL privé dans <code class="docutils literal notranslate"><span class="pre">`Deploy</span> <span class="pre">Hook`</span></code>
+pour créer dans github votre secrets variable : <code class="docutils literal notranslate"><span class="pre">`RENDER_WEBHOOK`</span></code>.
+Cela permettra à la Pipeline ci-cd.yml de redéployer automatique la mise à jour de l’image Docker latest sur Render.</p></li>
 </ul>
 </dd>
 </dl>
@@ -165,8 +169,7 @@ votre application est en ligne !</p></li>
 <li class="toctree-l1"><a class="reference internal" href="installation_project.html">Installation du projet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start_project.html">Guide de démarrage rapide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies et langages de programmation à utiliser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="structure_database.html">Structure et Modeles de la Base de Données</a></li>
-<li class="toctree-l1"><a class="reference internal" href="structure_database.html#schema-uml">Schéma UML:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure_database.html">Description de la structure de la base de données et des modèles de données</a></li>
 <li class="toctree-l1"><a class="reference internal" href="programming_interface.html">Description des interfaces de programmation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_manual.html">Guide d’utilisation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Procédures de déploiement et de gestion de l'application</a><ul>
